@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Nice Admin Template</title>
+
+    <style>
+           /* almost done need to change z index of offcanvas  */
+        /* 29/02:10 */
+        /* 28/00:20 */
+        /* 26/01:10 */
+        /* 27, 2:00 */
+        body {
+            background-color: aliceblue;
+        }
+
+        .navbar {
+            background-color: white;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-text {
+            color: #012970;
+            font-size: 24px;
+            font-weight: 800;
+            margin-left: 0.5rem;
+        }
+
+        .navbar-logo img {
+            vertical-align: middle;
+        }
+
+        #adminimg img {
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* recent activity */
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            /* spacing between items */
+            margin-bottom: 10px;
+        }
+
+        .activite-label {
+            min-width: 60px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .activity-item i {
+            font-size: 10px;
+        }
+
+        .activity-content {
+            flex: 1;
+            color: #333;
+        }
+
+        .line-icon {
+            padding: 0 12px;
+            color: #aaa5a5;
+
+        }
+
+        .circle-icon {
+            position: absolute;
+            left: 1.1rem;
+            bottom: 3.2rem;
+        }
+
+        .activity-item {
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .activity-time {
+            min-width: 70px;
+            font-weight: 500;
+        }
+
+        .divider {
+            position: relative;
+            margin-right: 1rem;
+        }
+
+        .card-body h5 {
+            margin: 0;
+        }
+
+        .activity-content a {
+            text-decoration: none;
+        }
+
+        /* line using border */
+        .timeline-line {
+            width: 5px;
+            height: 54px;
+            background-color: #dff4f888;
+            margin: 0 20px;
+
+        }
+
+        /* drop hover test */
+
+        .dropdown-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .custom-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 120px;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+            z-index: 1;
+            border-radius: 6px;
+        }
+
+        .custom-dropdown a {
+            display: block;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .custom-dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown-container:hover .custom-dropdown {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar menu-dropzindex?-->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="row align-items-center w-100">
+                <!-- Logo -->
+                <div class="col-4 d-flex align-items-center">
+                    <div class="navbar-logo d-flex align-items-center">
+                        <img src="adminlogo.png" alt="adminlogo" height="35" />
+                        <span class="navbar-text">Nice Admin</span>
+                    </div>
+
+
+                    <!-- Menu Button -->
+                    <div class="col-auto  ">
+                        <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                            aria-controls="offcanvasExample">
+                            <i class="bx bx-menu bx-md text-dark"></i>
+                        </a>
+
+                        <!-- Offcanvas Menu -->
+                        <div class="main-offcanvas ">
+
+                            <div class="offcanvas offcanvas-start overflow-x-auto" id="offcanvasExample"
+                                aria-labelledby="offcanvasExampleLabel">
+                                <div class="offcanvas-header ">
+                                    <div class="d-flex align-items-center justify-content-between px-3 py-2">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <i class='bx bx-grid-alt bx-sm' style='color:#0907f7'></i>
+                                            <span
+                                            style="color: #012970;font-size: 24px; font-weight: 600;">Documents</span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="offcanvas-body">
+
+                                    <div class="dropdown mt-3">
+                                        <div class="d-flex align-items-center justify-content-between px-3 py-2">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class='bx bxs-food-menu bx-sm' style='color:#0907f7'></i>
+                                                <a class="btn p-0" data-bs-toggle="collapse" href="#collapseExample"
+                                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <span
+                                                        style="color: #012970;font-size: 24px; font-weight: 600;">Components</span><i
+                                                        class='bx bx-chevron-down position-relative'
+                                                        style='color:#707070 ; left: 5rem;'></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body w-50 border-0">
+                                                <ul>
+                                                    <li>gcjhgj</li>
+                                                    <li>m m mn m</li>
+                                                    <li>dvcxvc</li>
+                                                    <li>cvcxvdsdsdfc</li>
+                                                    <li>vsdsf</li>
+                                                    <li>fsdfsdc</li>
+                                                    <li>dvdsfdf</li>
+                                                    <li>bhmj,m</li>
+                                                    <li>vvnmhnb</li>
+                                                    <li>vb bbb</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- forms -->
+                                    <div class="dropdown mt-3">
+                                        <div class="d-flex align-items-center justify-content-between px-3 py-2">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class='bx bxs-food-menu bx-sm' style='color:#0907f7'></i>
+                                                <a class="btn p-0" data-bs-toggle="collapse" href="#collapseExample"
+                                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <span
+                                                        style="color: #012970;font-size: 24px; font-weight: 600;">Forms</span><i
+                                                        class='bx bx-chevron-down position-relative'
+                                                        style='color:#707070 ; left: 5rem;'></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body w-50 border-0">
+                                                <ul>
+                                                    <li>gcjhgj</li>
+                                                    <li>m m mn m</li>
+                                                    <li>dvcxvc</li>
+                                                    <li>cvcxvdsdsdfc</li>
+                                                    <li>vsdsf</li>
+                                                    <li>fsdfsdc</li>
+                                                    <li>dvdsfdf</li>
+                                                    <li>bhmj,m</li>
+                                                    <li>vvnmhnb</li>
+                                                    <li>vb bbb</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Table -->
+                                    <div class="dropdown mt-3">
+                                        <div class="d-flex align-items-center justify-content-between px-3 py-2">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class='bx bx-detail bx-flip-verticle bx-sm'
+                                                    style='color:#0907f7'></i>
+                                                <a class="btn p-0" data-bs-toggle="collapse" href="#collapseExample"
+                                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <span
+                                                        style="color: #012970;font-size: 24px; font-weight: 600;">Tables</span><i
+                                                        class='bx bx-chevron-down position-relative'
+                                                        style='color:#707070 ; left: 5rem;'></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body w-50 border-0">
+                                                <ul>
+                                                    <li>gcjhgj</li>
+                                                    <li>m m mn m</li>
+                                                    <li>dvcxvc</li>
+                                                    <li>cvcxvdsdsdfc</li>
+                                                    <li>vsdsf</li>
+                                                    <li>fsdfsdc</li>
+                                                    <li>dvdsfdf</li>
+                                                    <li>bhmj,m</li>
+                                                    <li>vvnmhnb</li>
+                                                    <li>vb bbb</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Charts -->
+                                    <div class="dropdown mt-3">
+                                        <div class="d-flex align-items-center justify-content-between px-3 py-2">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class='bx bx-bar-chart bx-sm' style='color:#0907f7'></i>
+                                                <a class="btn p-0" data-bs-toggle="collapse" href="#collapseExample"
+                                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <span
+                                                        style="color: #012970;font-size: 24px; font-weight: 600;">Charts</span><i
+                                                        class='bx bx-chevron-down position-relative'
+                                                        style='color:#707070 ; left: 5rem;'></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body w-50 border-0">
+                                                <ul>
+                                                    <li>gcjhgj</li>
+                                                    <li>m m mn m</li>
+                                                    <li>dvcxvc</li>
+                                                    <li>cvcxvdsdsdfc</li>
+                                                    <li>vsdsf</li>
+                                                    <li>fsdfsdc</li>
+                                                    <li>dvdsfdf</li>
+                                                    <li>bhmj,m</li>
+                                                    <li>vvnmhnb</li>
+                                                    <li>vb bbb</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Icons -->
+                                    <div class="dropdown mt-3">
+                                        <div class="d-flex align-items-center justify-content-between px-3 py-2">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class='bx bx-diamond bx-sm' style='color:#0907f7'></i>
+                                                <a class="btn p-0" data-bs-toggle="collapse" href="#collapseExample"
+                                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <span
+                                                        style="color: #012970;font-size: 24px; font-weight: 600;">Icons</span><i
+                                                        class='bx bx-chevron-down position-relative'
+                                                        style='color:#707070 ; left: 5rem;'></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body w-50 border-0">
+                                                <ul>
+                                                    <li>gcjhgj</li>
+                                                    <li>m m mn m</li>
+                                                    <li>dvcxvc</li>
+                                                    <li>cvcxvdsdsdfc</li>
+                                                    <li>vsdsf</li>
+                                                    <li>fsdfsdc</li>
+                                                    <li>dvdsfdf</li>
+                                                    <li>bhmj,m</li>
+                                                    <li>vvnmhnb</li>
+                                                    <li>vb bbb</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <h6 class="text-muted ps-3"><b>PAGES</b></h6>
+
+                                    <!-- Register -->
+                                    <div class="dropdown mt-3">
+                                        <div class="d-flex align-items-center justify-content-between px-3 py-2">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class='bx bx-envelope bx-sm' style='color:#0907f7'></i>
+                                                <a class="btn p-0" data-bs-toggle="collapse" href="#collapseExample"
+                                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <span
+                                                        style="color: #012970;font-size: 24px; font-weight: 600;">Profile</span><i
+                                                        class='bx bx-chevron-down position-relative'
+                                                        style='color:#707070 ; left: 5rem;'></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body w-50 border-0">
+                                                <ul>
+                                                    <li>gcjhgj</li>
+                                                    <li>m m mn m</li>
+                                                    <li>dvcxvc</li>
+                                                    <li>cvcxvdsdsdfc</li>
+                                                    <li>vsdsf</li>
+                                                    <li>fsdfsdc</li>
+                                                    <li>dvdsfdf</li>
+                                                    <li>bhmj,m</li>
+                                                    <li>vvnmhnb</li>
+                                                    <li>vb bbb</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- F.A.Q   need question icons -->
+                                    <div class="dropdown mt-3">
+                                        <div class="d-flex align-items-center justify-content-between px-3 py-2">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <!-- <i class='bx bx-envelope bx-sm' style='color:#0907f7'></i> -->
+                                                <a class="btn p-0" data-bs-toggle="collapse" href="#collapseExample"
+                                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <span
+                                                        style="color: #012970;font-size: 24px; font-weight: 600;">F.A.Q</span><i
+                                                        class='bx bx-chevron-down position-relative'
+                                                        style='color:#707070 ; left: 5rem;'></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body w-50 border-0">
+                                                <ul>
+                                                    <li>gcjhgj</li>
+                                                    <li>m m mn m</li>
+                                                    <li>dvcxvc</li>
+                                                    <li>cvcxvdsdsdfc</li>
+                                                    <li>vsdsf</li>
+                                                    <li>fsdfsdc</li>
+                                                    <li>dvdsfdf</li>
+                                                    <li>bhmj,m</li>
+                                                    <li>vvnmhnb</li>
+                                                    <li>vb bbb</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Contact -->
+
+                                    <div class="dropdown mt-3">
+                                        <div class="d-flex align-items-center justify-content-between px-3 py-2">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class='bx bx-envelope bx-sm' style='color:#0907f7'></i>
+                                                <a class="btn p-0" data-bs-toggle="collapse" href="#collapseExample"
+                                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <span
+                                                        style="color: #012970;font-size: 24px; font-weight: 600;">Contact</span><i
+                                                        class='bx bx-chevron-down position-relative'
+                                                        style='color:#707070 ; left: 5rem;'></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body w-50 border-0">
+                                                <ul>
+                                                    <li>gcjhgj</li>
+                                                    <li>m m mn m</li>
+                                                    <li>dvcxvc</li>
+                                                    <li>cvcxvdsdsdfc</li>
+                                                    <li>vsdsf</li>
+                                                    <li>fsdfsdc</li>
+                                                    <li>dvdsfdf</li>
+                                                    <li>bhmj,m</li>
+                                                    <li>vvnmhnb</li>
+                                                    <li>vb bbb</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Register -->
+
+                                    <div class="dropdown mt-3">
+                                        <div class="d-flex align-items-center justify-content-between px-3 py-2">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class='bx bxs-spreadsheet bx-sm' style='color:#0907f7'></i>
+                                                <a class="btn p-0" data-bs-toggle="collapse" href="#collapseExample"
+                                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <span
+                                                        style="color: #012970;font-size: 24px; font-weight: 600;">Register</span><i
+                                                        class='bx bx-chevron-down position-relative'
+                                                        style='color:#707070 ; left: 5rem;'></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body w-50 border-0">
+                                                <ul>
+                                                    <li>gcjhgj</li>
+                                                    <li>m m mn m</li>
+                                                    <li>dvcxvc</li>
+                                                    <li>cvcxvdsdsdfc</li>
+                                                    <li>vsdsf</li>
+                                                    <li>fsdfsdc</li>
+                                                    <li>dvdsfdf</li>
+                                                    <li>bhmj,m</li>
+                                                    <li>vvnmhnb</li>
+                                                    <li>vb bbb</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Log-In -->
+                                    <div class="dropdown mt-3">
+                                        <div class="d-flex align-items-center justify-content-between px-3 py-2">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class='bx bxs-log-in bx-sm' style='color:#0907f7'></i>
+                                                <a class="btn p-0" data-bs-toggle="collapse" href="#collapseExample"
+                                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <span
+                                                        style="color: #012970;font-size: 24px; font-weight: 600;">Log-In</span><i
+                                                        class='bx bx-chevron-down position-relative'
+                                                        style='color:#707070 ; left: 5rem;'></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body w-50 border-0">
+                                                <ul>
+                                                    <li>gcjhgj</li>
+                                                    <li>m m mn m</li>
+                                                    <li>dvcxvc</li>
+                                                    <li>cvcxvdsdsdfc</li>
+                                                    <li>vsdsf</li>
+                                                    <li>fsdfsdc</li>
+                                                    <li>dvdsfdf</li>
+                                                    <li>bhmj,m</li>
+                                                    <li>vvnmhnb</li>
+                                                    <li>vb bbb</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- error -->
+                                    <div class="dropdown mt-3">
+                                        <div class="d-flex align-items-center justify-content-between px-3 py-2">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class='bx bxs-error-circle bx-sm' style='color:#0907f7'></i>
+                                                <a class="btn p-0" data-bs-toggle="collapse" href="#collapseExample"
+                                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <span
+                                                        style="color: #012970;font-size: 24px; font-weight: 600;">Error 404</span><i
+                                                        class='bx bx-chevron-down position-relative'
+                                                        style='color:#707070 ; left: 5rem;'></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body w-50 border-0">
+                                                <ul>
+                                                    <li>gcjhgj</li>
+                                                    <li>m m mn m</li>
+                                                    <li>dvcxvc</li>
+                                                    <li>cvcxvdsdsdfc</li>
+                                                    <li>vsdsf</li>
+                                                    <li>fsdfsdc</li>
+                                                    <li>dvdsfdf</li>
+                                                    <li>bhmj,m</li>
+                                                    <li>vvnmhnb</li>
+                                                    <li>vb bbb</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Blank -->
+                                    <div class="dropdown mt-3">
+                                        <div class="d-flex align-items-center justify-content-between px-3 py-2">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class='bx bxs-file-blank bx-sm' style='color:#0907f7'></i>
+                                                <a class="btn p-0" data-bs-toggle="collapse" href="#collapseExample"
+                                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <span
+                                                        style="color: #012970;font-size: 24px; font-weight: 600;">Blank</span><i
+                                                        class='bx bx-chevron-down position-relative'
+                                                        style='color:#707070 ; left: 5rem;'></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body w-50 border-0">
+                                                <ul>
+                                                    <li>gcjhgj</li>
+                                                    <li>m m mn m</li>
+                                                    <li>dvcxvc</li>
+                                                    <li>cvcxvdsdsdfc</li>
+                                                    <li>vsdsf</li>
+                                                    <li>fsdfsdc</li>
+                                                    <li>dvdsfdf</li>
+                                                    <li>bhmj,m</li>
+                                                    <li>vvnmhnb</li>
+                                                    <li>vb bbb</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Search -->
+                <div class="col-4 d-flex ">
+                    <form class="position-relative width-40">
+                        <input class="form-control pe-5" type="search" placeholder="Search" />
+                        <i class="bx bx-search position-absolute top-50 end-0 translate-middle-y pe-3 text-muted"></i>
+                    </form>
+                </div>
+
+                <div class="col-md-4 d-flex justify-content-end align-items-center gap-2" id="adminimg">
+                    <!-- Notification & Messages -->
+                    <div class=" d-flex justify-content-end align-items-center gap-3">
+                        <!-- Bell Dropdown -->
+                        <div class="dropdown">
+                            <a class="text-decoration-none text-dark dropdown-toggle" href="#" id="notifDropdown"
+                                data-bs-toggle="dropdown">
+                                <i class="bx bx-bell bx-md"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="notifDropdown">
+                                <li><a class="dropdown-item" href="#">Notification 1</a></li>
+                                <li><a class="dropdown-item" href="#">Notification 2</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Message Dropdown -->
+                        <div class="dropdown">
+                            <a class="text-decoration-none text-dark dropdown-toggle" href="#" id="msgDropdown"
+                                data-bs-toggle="dropdown">
+                                <i class="bx bx-message-square-detail bx-md"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="msgDropdown">
+                                <li><a class="dropdown-item" href="#">Message 1</a></li>
+                                <li><a class="dropdown-item" href="#">Message 2</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Profile -->
+
+                    <img src="adminprofile-img.jpg" alt="adminimg" width="48" height="48" />
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="profileDropdown"
+                            data-bs-toggle="dropdown">
+                            K. Anderson
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- dashboard-->
+    <div class="mainpage p-2">
+        <section class="heading " style="padding-top: 6rem;">
+            <div class="p-3">
+                <h2><b>
+                        Dashboard
+                    </b></h2>
+                <nav style="--bs-breadcrumb-divider: '/';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+        <!-- main container -->
+        <div class="maincard-container ">
+            <div class="container-fluid">
+                <div class="row ">
+
+                    <!-- left side -->
+                    <div class="col-8">
+                        <!-- sales/reve -->
+                        <div class="row">
+                            <!-- sales -->
+                            <div class="col-sm-6 mb-5">
+                                <div class="card" style="width: 28rem; height: 13rem;">
+                                    <div class="card-body">
+                                        <ul class="nav p-0 m-0">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" aria-current="page" href="#">
+                                                    <h5>Sales</h5>
+                                                </a>
+                                            </li>
+                                            <p class="py-2">/</p>
+                                            <li class="nav-item p-0 m0">
+                                                <a class="nav-link disabled" href="#" tabindex="-1"
+                                                    aria-disabled="true">This Month</a>
+                                            </li>
+                                        </ul>
+                                        <div class="text d-flex">
+                                            <div class="position-absolute top-0 end-0 p-2">
+
+                                                <!-- drop on hover-->
+                                                <div class="position-absolute top-0 end-0 p-2 dropdown-container">
+                                                    <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                                    <div class="custom-dropdown text-left p-1">
+                                                        <a href="#"
+                                                            style="background-color: rgba(74, 195, 251, 0.081);">Filter</a>
+                                                        <a href="#">Today</a>
+                                                        <a href="#">This Month</a>
+                                                        <a href="#">This Year</a>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <i class='bx bx-cart bx-lg text-primary py-3 p-2 ps-3'
+                                                style="background-color: rgba(205, 222, 239, 0.378); width: 80px; height: 75px; border-radius: 50%;"></i>
+                                            <div class="text-center ps-5">
+                                                <h2>145</h2>
+                                                <span>12% Increase</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-4">
+                                <div class="card" style="width: 28rem; height: 13rem;">
+                                    <div class="card-body">
+                                        <ul class="nav p-0 m-0">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" aria-current="page" href="#">
+                                                    <h5>Revenue</h5>
+                                                </a>
+                                            </li>
+                                            <p class="py-2">/</p>
+                                            <li class="nav-item p-0 m0">
+                                                <a class="nav-link disabled" href="#" tabindex="-1"
+                                                    aria-disabled="true">This Month</a>
+                                            </li>
+                                        </ul>
+
+                                        <div class="text d-flex">
+                                            <div class="position-absolute top-0 end-0 p-2">
+                                                <!-- drop on hover -->
+                                                <div class="position-absolute top-0 end-0 p-2 dropdown-container">
+                                                    <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                                    <div class="custom-dropdown text-left p-1">
+                                                        <a href="#"
+                                                            style="background-color: rgba(74, 195, 251, 0.081);">Filter</a>
+                                                        <a href="#">Today</a>
+                                                        <a href="#">This Month</a>
+                                                        <a href="#">This Year</a>
+                                                    </div>
+                                                </div>
+                                                <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                            </div>
+
+                                            <i class='bx bx-dollar bx-lg text-green py-3 p-2 ps-3'
+                                                style="background-color: rgba(46, 202, 106, 0.255); width: 80px; height: 75px; border-radius: 50%;"></i>
+                                            <div class="text-center ps-5">
+                                                <h2>$3264</h2>
+                                                <spa>8% Increase</spa>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- customers -->
+                            <div class="col-12 mb-4">
+                                <div class="card w-100" style=" height: 10rem;">
+                                    <div class="card-body">
+                                        <ul class="nav p-0 m-0">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" aria-current="page" href="#">
+                                                    <h5>Customers</h5>
+                                                </a>
+                                            </li>
+                                            <p class="py-2">/</p>
+                                            <li class="nav-item p-0 m0">
+                                                <a class="nav-link disabled" href="#" tabindex="-1"
+                                                    aria-disabled="true">This Year</a>
+                                            </li>
+                                        </ul>
+
+                                        <div class="text d-flex">
+                                            <div class="position-absolute top-0 end-0 p-2">
+                                                <!-- drop on hover-->
+                                                <div class="position-absolute top-0 end-0 p-2 dropdown-container">
+                                                    <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                                    <div class="custom-dropdown text-left p-1">
+                                                        <a href="#"
+                                                            style="background-color: rgba(74, 195, 251, 0.081);">Filter</a>
+                                                        <a href="#">Today</a>
+                                                        <a href="#">This Month</a>
+                                                        <a href="#">This Year</a>
+                                                    </div>
+                                                </div>
+
+                                                <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                            </div>
+
+                                            <i class='bx bx-group bx-flip-horizontal bx-lg py-3 p-2 ps-3'
+                                                style="background-color: #ff771d3d; width: 80px; height: 75px; border-radius: 50%;"></i>
+                                            <div class="text-center ps-5">
+                                                <h2>1244</h2>
+                                                <span>12% Decrease</span>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- reports -->
+
+                            <div class="col-12 mb-4">
+                                <div class="card w-100" style=" height: auto;">
+                                    <div class="card-body">
+                                        <ul class="nav p-0 m-0">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" aria-current="page" href="#">
+                                                    <h5>Reports</h5>
+                                                </a>
+                                            </li>
+                                            <p class="py-2">/</p>
+                                            <li class="nav-item p-0 m0">
+                                                <a class="nav-link disabled" href="#" tabindex="-1"
+                                                    aria-disabled="true">Today</a>
+                                            </li>
+                                        </ul>
+                                        <div class="position-absolute top-0 end-0 p-2">
+                                            <!-- drop on hover-->
+                                            <div class="position-absolute top-0 end-0 p-2 dropdown-container">
+                                                <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                                <div class="custom-dropdown text-left p-1">
+                                                    <a href="#"
+                                                        style="background-color: rgba(74, 195, 251, 0.081);">Filter</a>
+                                                    <a href="#">Today</a>
+                                                    <a href="#">This Month</a>
+                                                    <a href="#">This Year</a>
+                                                </div>
+                                            </div>
+
+                                            <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                        </div>
+
+                                        <img src="OIP.jpg" alt="" width="100%" height="350px">
+                                        <div class="circle-text text-center">
+                                            <i class='bx bxs-circle' style='color:#041dff'></i>Sales
+                                            <i class='bx bxs-circle' style='color:#2ff70a'></i>Revenue
+                                            <i class='bx bxs-circle' style='color:#ffea00'></i>Coustomers
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Recent sales -->
+                            <div class="col-12 mb-4">
+                                <div class="card w-100">
+                                    <div class="card-body mb-2" style=" height: 25rem; ">
+                                        <ul class="nav p-0 m-0">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" aria-current="page" href="#">
+                                                    <h5>Recent Sales</h5>
+                                                </a>
+                                            </li>
+                                            <p class="py-2">/</p>
+                                            <li class="nav-item p-0 m0">
+                                                <a class="nav-link disabled" href="#" tabindex="-1"
+                                                    aria-disabled="true">Today</a>
+                                            </li>
+                                        </ul>
+                                        <section class="serch-container w-100 mb-2">
+                                            <div class="container p-0">
+                                                <div class="container-fluid w-100 p-0">
+                                                    <div class="row">
+                                                        <div class="col-7">
+                                                            <!-- number drop -->
+                                                            <div class="dropdown  ">
+                                                                <button class="btn  dropdown-toggle border border-2 "
+                                                                    type="button" id="dropdownMenuButton1"
+                                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                                    10
+                                                                </button>
+                                                                entries per page
+                                                                <ul class="dropdown-menu overflow-auto "
+                                                                    aria-labelledby="dropdownMenuButton1"
+                                                                    style="height: 148px; width: 6rem !important; ">
+
+                                                                    <li><a class="dropdown-item" href="#">1</a></li>
+                                                                    <li><a class="dropdown-item" href="#">2</a></li>
+                                                                    <li><a class="dropdown-item" href="#">3</a></li>
+                                                                    <li><a class="dropdown-item" href="#">4</a></li>
+                                                                    <li><a class="dropdown-item" href="#">5</a></li>
+                                                                    <li><a class="dropdown-item" href="#">6</a></li>
+                                                                    <li><a class="dropdown-item" href="#">7</a></li>
+                                                                    <li><a class="dropdown-item" href="#">8</a></li>
+                                                                    <li><a class="dropdown-item" href="#">9</a></li>
+                                                                    <li><a class="dropdown-item" href="#">10</a></li>
+                                                                </ul>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="col-4 position-relative  " style="left: 150px;">
+                                                            <form class="w-75   ">
+                                                                <input class="form-control pe-5" type="search"
+                                                                    placeholder="Search..." />
+
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <div class="position-absolute top-0 end-0 p-2">
+                                            <!-- drop on hover-->
+                                            <div class="position-absolute top-0 end-0 p-2 dropdown-container">
+                                                <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                                <div class="custom-dropdown text-left p-1">
+                                                    <a href="#"
+                                                        style="background-color: rgba(74, 195, 251, 0.081);">Filter</a>
+                                                    <a href="#">Today</a>
+                                                    <a href="#">This Month</a>
+                                                    <a href="#">This Year</a>
+                                                </div>
+                                            </div>
+
+                                            <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                        </div>
+
+                                        <!-- table -->
+                                        <div class="table-container p-1 overflow-scroll h-75 w-0">
+                                            <table cellpadding="10" cellspacing="0" class=" w-100 h-50">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Customer</th>
+                                                        <th>Product</th>
+                                                        <th>Price</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>#2457</td>
+                                                        <td>Brandon Jacob</td>
+                                                        <td>At praesentium minu</td>
+                                                        <td>$64</td>
+                                                        <td><span
+                                                                class="badge rounded-pill bg-success text-white">Approved</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>#2049</td>
+                                                        <td>Ashleigh Langosh</td>
+                                                        <td>At recusandae consectetur</td>
+                                                        <td>$147</td>
+                                                        <td><span
+                                                                class="badge rounded-pill bg-danger text-white">Rejected</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>#2147</td>
+                                                        <td>Bridie Kessler</td>
+                                                        <td>Blanditiis dolor omnis similique</td>
+                                                        <td>$47</td>
+                                                        <td><span
+                                                                class="badge rounded-pill bg-warning text-white">Pending</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>#2644</td>
+                                                        <td>Raheem Lehner</td>
+                                                        <td>Sunt similique distinctio</td>
+                                                        <td>$165</td>
+                                                        <td><span
+                                                                class="badge rounded-pill bg-success text-white">Approved</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>#2644</td>
+                                                        <td>Angus Grady</td>
+                                                        <td>Ut voluptatem id earum et</td>
+                                                        <td>$67</td>
+                                                        <td><span
+                                                                class="badge rounded-pill bg-warning text-white">Pending</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>#2457</td>
+                                                        <td>Brandon Jacob</td>
+                                                        <td>At praesentium minu</td>
+                                                        <td>$64</td>
+                                                        <td><span
+                                                                class="badge rounded-pill bg-success text-white">Approved</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>#2049</td>
+                                                        <td>Ashleigh Langosh</td>
+                                                        <td>At recusandae consectetur</td>
+                                                        <td>$147</td>
+                                                        <td><span
+                                                                class="badge rounded-pill bg-success text-white">Approved</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>#2147</td>
+                                                        <td>Bridie Kessler</td>
+                                                        <td>Blanditiis dolor omnis similique</td>
+                                                        <td>$47</td>
+                                                        <td><span
+                                                                class="badge rounded-pill bg-warning text-white">Pending</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>#2644</td>
+                                                        <td>Raheem Lehner</td>
+                                                        <td>Sunt similique distinctio</td>
+                                                        <td>$165</td>
+                                                        <td><span
+                                                                class="badge rounded-pill bg-success text-white">Approved</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>#2644</td>
+                                                        <td>Angus Grady</td>
+                                                        <td>Ut voluptatem id earum et</td>
+                                                        <td>$67</td>
+                                                        <td><span
+                                                                class="badge rounded-pill bg-danger text-dark ">Rejected</span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- top selling -->
+                            <div class="col-12 mb-4">
+                                <div class="card w-100" style=" height: auto;">
+                                    <div class="card-body">
+                                        <ul class="nav p-0 m-0">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" aria-current="page" href="#">
+                                                    <h5>Top Selling</h5>
+                                                </a>
+                                            </li>
+                                            <p class="py-2">/</p>
+                                            <li class="nav-item p-0 m0">
+                                                <a class="nav-link disabled" href="#" tabindex="-1"
+                                                    aria-disabled="true">Today</a>
+                                            </li>
+                                        </ul>
+                                        <div class="position-absolute top-0 end-0 p-2">
+                                            <!-- drop on hover-->
+                                            <div class="position-absolute top-0 end-0 p-2 dropdown-container">
+                                                <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                                <div class="custom-dropdown text-left p-1">
+                                                    <a href="#"
+                                                        style="background-color: rgba(74, 195, 251, 0.081);">Filter</a>
+                                                    <a href="#">Today</a>
+                                                    <a href="#">This Month</a>
+                                                    <a href="#">This Year</a>
+                                                </div>
+                                            </div>
+
+                                            <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                        </div>
+
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Preview</th>
+                                                    <th scope="col">Product</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Sold</th>
+                                                    <th scope="col">Revenue</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row"><img src="product-1.jpg" alt="" width="80rem"
+                                                            height="75rem"></th>
+                                                    <td>Ut inventore ipsa voluptas nulla</td>
+                                                    <td>$64</td>
+                                                    <td>124</td>
+                                                    <td>$5,828</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><img src="product-2.jpg" alt="" width="80rem"
+                                                            height="75rem"></th>
+                                                    <td>Ut inventore ipsa voluptas nulla</td>
+                                                    <td>$64</td>
+                                                    <td>124</td>
+                                                    <td>$5,828</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><img src="product-3.jpg" alt="" width="80rem"
+                                                            height="75rem"></th>
+                                                    <td>Ut inventore ipsa voluptas nulla</td>
+                                                    <td>$64</td>
+                                                    <td>124</td>
+                                                    <td>$5,828</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th scope="row"><img src="product-4.jpg" alt="" width="80rem"
+                                                            height="75rem"></th>
+                                                    <td>Ut inventore ipsa voluptas nulla</td>
+                                                    <td>$64</td>
+                                                    <td>124</td>
+                                                    <td>$5,828</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th scope="row"><img src="product-5.jpg" alt="" width="80rem"
+                                                            height="75rem"></th>
+                                                    <td>Ut inventore ipsa voluptas nulla</td>
+                                                    <td>$64</td>
+                                                    <td>124</td>
+                                                    <td>$5,828</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- rightside -->
+
+                    <!-- Recent Activity -->
+                    <div class="col-4 ">
+                        <div class="card mb-4 ">
+                            <div class="card-body p-5 ">
+                                <ul class="nav p-0 m-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#">
+                                            <h5>Recent Activity</h5>
+                                        </a>
+                                    </li>
+                                    <p class="py-2">/</p>
+                                    <li class="nav-item">
+                                        <a class="nav-link disabled" href="#" aria-disabled="true">Today</a>
+                                    </li>
+                                </ul>
+                                <div class="position-absolute top-0 end-0 p-2">
+                                    <!-- drop on hover-->
+                                    <div class="position-absolute top-0 end-0 p-2 dropdown-container">
+                                        <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                        <div class="custom-dropdown text-left p-1">
+                                            <a href="#" style="background-color: rgba(74, 195, 251, 0.081);">Filter</a>
+                                            <a href="#">Today</a>
+                                            <a href="#">This Month</a>
+                                            <a href="#">This Year</a>
+                                        </div>
+                                    </div>
+
+                                    <i class="bx bx-dots-horizontal-rounded bx-md text-muted"></i>
+                                </div>
+
+                                <div class="pt-3">
+                                    <!-- Activity Items -->
+                                    <div class="activity-item d-flex">
+                                        <div class="activity-time text-muted fw-normal">32 min</div>
+                                        <div class="divider">
+                                            <div class="timeline-line"></div>
+                                            <i class="bx bxs-circle circle-icon" style="color: #04c800;"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a>
+                                            beatae
+                                        </div>
+                                    </div>
+
+                                    <div class="activity-item d-flex">
+                                        <div class="activity-time text-muted fw-normal">56 min</div>
+                                        <div class="divider">
+                                            <div class="timeline-line"></div>
+                                            <i class="bx bxs-circle circle-icon" style="color: #c30101;"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            Voluptatem blanditiis blanditiis eveniet
+                                        </div>
+                                    </div>
+
+                                    <div class="activity-item d-flex">
+                                        <div class="activity-time text-muted fw-normal">2 hrs</div>
+                                        <div class="divider">
+                                            <div class="timeline-line"></div>
+                                            <i class="bx bxs-circle circle-icon" style="color: blue;"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            Voluptates corrupti molestias voluptatem
+                                        </div>
+                                    </div>
+
+                                    <div class="activity-item d-flex">
+                                        <div class="activity-time text-muted fw-normal">1 day</div>
+                                        <div class="divider">
+                                            <div class="timeline-line"></div>
+                                            <i class="bx bxs-circle circle-icon" style="color: #4ac3fb;"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati
+                                                voluptatem</a>
+                                            tempore
+                                        </div>
+                                    </div>
+
+                                    <div class="activity-item d-flex">
+                                        <div class="activity-time text-muted fw-normal">2 days</div>
+                                        <div class="divider">
+                                            <div class="timeline-line"></div>
+                                            <i class="bx bxs-circle circle-icon" style="color: #fffb05;"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            Est sit eum reiciendis exercitationem
+                                        </div>
+                                    </div>
+
+                                    <div class="activity-item d-flex">
+                                        <div class="activity-time text-muted fw-normal">4 weeks</div>
+                                        <div class="divider">
+                                            <div class="timeline-line"></div>
+                                            <i class="bx bxs-circle circle-icon" style="color: grey;"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- budget -->
+
+                        <div class="card mb-4" style=" height: auto;">
+                            <div class="card-body">
+                                <ul class="nav p-0 m-0">
+                                    <div class="position-absolute top-0 end-0 p-2">
+                                        <!-- drop on hover-->
+                                        <div class="position-absolute top-0 end-0 p-2 dropdown-container">
+                                            <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                            <div class="custom-dropdown text-left p-1">
+                                                <a href="#"
+                                                    style="background-color: rgba(74, 195, 251, 0.081);">Filter</a>
+                                                <a href="#">Today</a>
+                                                <a href="#">This Month</a>
+                                                <a href="#">This Year</a>
+                                            </div>
+                                        </div>
+
+                                        <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                    </div>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="#">
+                                            <h5>Budget Report</h5>
+                                        </a>
+                                    </li>
+                                    <p class="py-2">/</p>
+                                    <li class="nav-item p-0 m0">
+                                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">This
+                                            Month</a>
+                                    </li>
+                                </ul>
+                                <img src="budgetreportNA.png" alt="">
+                            </div>
+                        </div>
+
+                        <!-- web -->
+
+                        <div class="card mb-4" style=" height: auto;">
+                            <div class="card-body">
+                                <ul class="nav p-0 m-0">
+                                    <div class="position-absolute top-0 end-0 p-2">
+                                        <!-- drop on hover-->
+                                        <div class="position-absolute top-0 end-0 p-2 dropdown-container">
+                                            <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                            <div class="custom-dropdown text-left p-1">
+                                                <a href="#"
+                                                    style="background-color: rgba(74, 195, 251, 0.081);">Filter</a>
+                                                <a href="#">Today</a>
+                                                <a href="#">This Month</a>
+                                                <a href="#">This Year</a>
+                                            </div>
+                                        </div>
+
+                                        <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                    </div>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="#">
+                                            <h5>Website Traffic</h5>
+                                        </a>
+                                    </li>
+                                    <p class="py-2">/</p>
+                                    <li class="nav-item p-0 m0">
+                                        <a class="nav-link disabled" href="#" tabindex="-1"
+                                            aria-disabled="true">Today</a>
+                                    </li>
+                                </ul>
+
+                                <img src="webtrafic.png" alt="">
+
+                            </div>
+                        </div>
+
+                        <!-- news -->
+
+                        <div class="card mb-4" style=" height: auto;">
+                            <div class="card-body">
+                                <ul class="nav p-0 m-0">
+                                    <div class="position-absolute top-0 end-0 p-2">
+                                        <!-- drop on hover-->
+                                        <div class="position-absolute top-0 end-0 p-2 dropdown-container">
+                                            <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                            <div class="custom-dropdown text-left p-1">
+                                                <a href="#"
+                                                    style="background-color: rgba(74, 195, 251, 0.081);">Filter</a>
+                                                <a href="#">Today</a>
+                                                <a href="#">This Month</a>
+                                                <a href="#">This Year</a>
+                                            </div>
+                                        </div>
+
+                                        <i class='bx bx-dots-horizontal-rounded bx-md text-muted'></i>
+                                    </div>
+
+                                    <li class="nav-item">
+
+                                        <a class="nav-link active" aria-current="page" href="#">
+                                            <h5>News & Update</h5>
+                                        </a>
+                                    </li>
+                                    <p class="py-2">/</p>
+                                    <li class="nav-item p-0 m0">
+                                        <a class="nav-link disabled" href="#" tabindex="-1"
+                                            aria-disabled="true">Today</a>
+                                    </li>
+                                </ul>
+
+                                <!-- post -->
+                                <div class="post-item d-flex p-1 gap-3 mb-3">
+                                    <img src="news-1.jpg" alt="news1" width="80rem" height="75rem">
+                                    <div class="post-text">
+                                        <p><a href="#">Nihil blanditiis at in nihil autem</a></p>
+                                        <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="post-item d-flex p-1 gap-3 mb-3">
+                                    <img src="news-2.jpg" alt="news1" width="80rem" height="75rem">
+                                    <div class="post-text">
+                                        <p><a href="#">Laborum corporis quo dara net para</a></p>
+                                        <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum
+                                            cuder...</p>
+                                    </div>
+                                </div>
+
+                                <div class="post-item d-flex p-1 gap-3 mb-3">
+                                    <img src="news-4.jpg" alt="news1" width="80rem" height="75rem">
+                                    <div class="post-text">
+                                        <p><a href="#">Quidem autem et impedit
+                                                Illo</a></p>
+                                        <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona
+                                            nande...</p>
+                                    </div>
+                                </div>
+                                <div class="post-item d-flex p-1 gap-3 mb-3">
+                                    <img src="news-5.jpg" alt="news1" width="80rem" height="75rem">
+                                    <div class="post-text">
+                                        <p><a href="#">Et dolores corrupti quae illo quod dolor</a></p>
+                                        <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos
+                                            eius...</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <hr>
+            <div class="fotter text-center " style="padding: 0%; margin: 0%;">
+                <div class="fotter-text mb-0 ">
+                    <p> © Copyright <b style="color: #012970; ">NiceAdmin</b>. All Rights Reserved</p>
+                    <p>Designed by <span style="color: #7295d1;">BootstrapMade</span></p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
