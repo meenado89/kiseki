@@ -1,0 +1,13 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+#hero {
+  background: #d9f6dc;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 20px rgba(0, 128, 0, 0.1);
+  transition: 0.3s ease;
+}
